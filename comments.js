@@ -9,7 +9,7 @@ function addComment(i) {
 
 	// insert the new div into the clicked button's parent-div
 	var p = document.getElementById("button" + i ).parentElement;
-	p.appendChild(div);
+	p.insertBefore(div, document.getElementById("button" + i ));
 
 	// depth rises by 1
 	var fb=parseInt(p.getAttribute("fizzbuzz"));
