@@ -1,18 +1,31 @@
 var buttonid = 0;
 
-function addComment(i) {
-	buttonid +=1;
+function clickButton(i) {
 
-	// create a new div and fill it with a new button
-	var div = document.createElement('DIV');
-	div.innerHTML = '<button id="button' + buttonid + '" type="button" onclick="addComment(' + buttonid + ')">Klick</button><br><br>';
 
 	// insert the new div into the clicked button's parent-div
 	var p = document.getElementById("button" + i ).parentElement;
-	p.insertBefore(div, document.getElementById("button" + i ));
+
+	// find out current depth of the parent div
+	var fb = parseInt(p.getAttribute("fizzbuzz"));
+
+	// create new div and change its order with the button
+	var newDiv = addComment(p, fb);
+	p.insertBefore(newDiv, document.getElementById("button" + i ));
+
+}
+
+function addComment(parentDiv, fb)
+{
+	// create a new div and fill it with a new button
+	var div = document.createElement('DIV');
+	div.innerHTML = '<button id="button' + buttonid + '" type="button" onclick="clickButton(' + buttonid + ')">Klick</button><br><br>';
+	div.classList.add("comment");
+
+	// append new div to given parentDiv
+	parentDiv.appendChild(div);
 
 	// depth rises by 1
-	var fb=parseInt(p.getAttribute("fizzbuzz"));
 	fb +=1;
 	div.setAttribute("fizzbuzz", fb);
 
@@ -24,4 +37,11 @@ function addComment(i) {
 		div.style.backgroundColor = "white";
 	}
 
+	// increase global variable buttonid to avoid id collisions
+	buttonid +=1;
+
+	return div;
 }
+
+// create initial div and button
+addComment(document.getElementById("container"), 0);
