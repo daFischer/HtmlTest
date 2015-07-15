@@ -31,10 +31,10 @@ function addComment(parentDiv, fb)
 
 	// divs in every second depths are gray
 	if (fb % 2 == 0) {
-		div.style.backgroundColor = "gray";
+		div.style.backgroundColor = "#F0F0F0";
 	}
 	else {
-		div.style.backgroundColor = "white";
+		div.style.backgroundColor = "#E0E0E0";
 	}
 
 	// increase global variable buttonid to avoid id collisions
