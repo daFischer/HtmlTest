@@ -6,22 +6,27 @@ function clickButton(i) {
 
 
 	// insert the new div into the clicked button's parent-div
-	var p = document.getElementById("button" + i ).parentElement;
+	var p = $("#button" + i ).parent();
 
 	// find out current depth of the parent div
-	var fb = parseInt(p.getAttribute("fizzbuzz"));
+	var fb = parseInt(p.attr("fizzbuzz"));
 
+	// create a new paragraph
 	var newPara = document.createElement('p');
-	newPara.innerText = document.getElementById("textarea" + i ).value;
-	newPara.textContent = document.getElementById("textarea" + i ).value;
-	p.insertBefore(newPara, document.getElementById("textarea" + i ));
-	//p.removeChild(document.getElementById("textarea" + i ));
+	// get the string we want to insert from the correct textarea element
+	var textarea = $("#textarea" + i);
+	// set the new paragraph's text to the edited string value
+	$(newPara).text(textarea.val());
+	// edit the string to enable correct newlines
+	$(newPara).html($(newPara).html().replace(/\n/g, '<br>'));
+	// the textarea's string is reset
+	textarea.val("");
+	// insert the new paragraph
+	textarea.before(newPara);
 
 	// create new div and change its order with the button
 	var newDiv = addComment(p, fb);
-	p.insertBefore(newDiv, document.getElementById("textarea" + i ));
-
-	document.getElementById("textarea" + i ).value = "";
+	textarea.before(newDiv);
 
 }
 
@@ -33,7 +38,7 @@ function addComment(parentDiv, fb)
 	div.classList.add("comment");
 
 	// append new div to given parentDiv
-	parentDiv.appendChild(div);
+	parentDiv.append(div);
 
 	// depth rises by 1
 	fb +=1;
@@ -54,4 +59,4 @@ function addComment(parentDiv, fb)
 }
 
 // create initial div and button
-addComment(document.getElementById("container"), 0);
+addComment($("#container"), 0);
