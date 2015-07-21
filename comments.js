@@ -3,15 +3,24 @@ var buttonid = 0;
 function clickButton(i) {
 
 
+
+
 	// insert the new div into the clicked button's parent-div
 	var p = document.getElementById("button" + i ).parentElement;
 
 	// find out current depth of the parent div
 	var fb = parseInt(p.getAttribute("fizzbuzz"));
 
+	var newPara = document.createElement('p');
+	newPara.innerText = document.getElementById("textarea" + i ).value;
+	p.insertBefore(newPara, document.getElementById("textarea" + i ));
+	//p.removeChild(document.getElementById("textarea" + i ));
+
 	// create new div and change its order with the button
 	var newDiv = addComment(p, fb);
-	p.insertBefore(newDiv, document.getElementById("button" + i ));
+	p.insertBefore(newDiv, document.getElementById("textarea" + i ));
+
+	document.getElementById("textarea" + i ).value = "";
 
 }
 
@@ -19,7 +28,7 @@ function addComment(parentDiv, fb)
 {
 	// create a new div and fill it with a new button
 	var div = document.createElement('DIV');
-	div.innerHTML = '<button id="button' + buttonid + '" type="button" onclick="clickButton(' + buttonid + ')">Klick</button><br><br>';
+	div.innerHTML = '<textarea id="textarea' + buttonid + '"></textarea><br><button id="button' + buttonid + '" type="button" onclick="clickButton(' + buttonid + ')">Klick</button><br><br>';
 	div.classList.add("comment");
 
 	// append new div to given parentDiv
