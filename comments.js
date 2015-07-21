@@ -13,6 +13,7 @@ function clickButton(i) {
 
 	var newPara = document.createElement('p');
 	newPara.innerText = document.getElementById("textarea" + i ).value;
+	newPara.textContent = document.getElementById("textarea" + i ).value;
 	p.insertBefore(newPara, document.getElementById("textarea" + i ));
 	//p.removeChild(document.getElementById("textarea" + i ));
 
